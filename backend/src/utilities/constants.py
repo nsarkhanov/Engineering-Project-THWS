@@ -16,6 +16,7 @@ chunk_size=0.1
 # constant for sensor 
 left_hand_data_length=21
 other_data_length=18
+brain_sensor_length=19
 #serial connection 
 port_name="/dev/ttyACM0"
 baudrate=9600
