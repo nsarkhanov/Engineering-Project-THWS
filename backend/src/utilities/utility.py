@@ -12,7 +12,7 @@ from src.model.brain_sensor import brain_sensor_reader
 import json,os,time
 from datetime import datetime
 import requests
-from src.utilities.constants import url_brain_sensor,url_imu_sensor,url_heart_rate,url_skin_sensor
+from src.utilities.constants import url_brain_sensor,url_imu_sensor,url_heart_rate,url_skin_sensor,chunk_size
 
 class CustomJSONEncoder(json.JSONEncoder):
     def default(self, obj):
@@ -117,7 +117,7 @@ def read_batch_data():
             time.sleep(0.1)
             print("Skin sensor data sent successfully.")
         if 'hear_rate' in item:
-            r=requests.post(url_skin_sensor,item['hear_rate'])
+            r=requests.post(url_heart_rate,item['hear_rate'])
             time.sleep(0.1)
             print("Heart rate sensor data sent successfully.")
     print("Chunk data sent successfuly.")
@@ -128,8 +128,6 @@ def read_batch_data():
 
 def sender_batch(data,userID):
     data_saver(data,userID)
-    # Define chunk size mb 
-    chunk_size =0.02
     # Collect data from sensor
     if get_size_mb(batch_path)>chunk_size:
         read_batch_data()

@@ -4,8 +4,8 @@ url_imu_sensor = "http://localhost:8080/api/imu_sensor/"
 url_brain_sensor="http://localhost:8080/api/brain_sensor/"
 url_skin_sensor="http://localhost:8080/api/skin_sensor/"
 
-# chunk size of batch file
-chunk_size=1000
+# chunk size mb  of batch file
+chunk_size=0.1
 
 # constant for sensor 
 left_hand_data_length=21
