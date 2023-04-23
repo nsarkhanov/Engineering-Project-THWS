@@ -51,6 +51,10 @@ In the Arduino IDE, go to Tools > Board and select your ESP board.
 In the Arduino IDE, go to Tools > Port and select the port to which your ESP is connected.
 Upload the code to your ESP by clicking on the Upload button in the Arduino IDE.
 Once the code is uploaded to your ESP, it will start sending data to the application in the correct data structur
+
+## API Testing
+To test the API endpoints, you can use the following test data. Simply replace the endpoint and data with the appropriate values for your use case
+
 ### Collecting Sensor Data
 
 To collect sensor data, simply run the `main.py` script. This will start collecting data from the connected sensors and storing it in the MongoDB database.
