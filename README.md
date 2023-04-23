@@ -11,6 +11,35 @@ This project involves collecting real-time data from pulse, heart pulse, gyrosco
 - [Technologies](#technologies)
 - [Contributing](#contributing)
 - [License](#license)
+## Project Architecture
+The project consists of one "mother" board and four "children" ESP8266 boards. The children boards collect sensor data and send it to the mother board, which in turn sends the data to the application for storage in a MongoDB database.
+
+In addition to the children boards, the project includes a heart rate sensor and a skin resistance sensor on the left hand of the user, as well as an inertial measurement unit (IMU) on each child board. The project also includes a Muse brain sensor to collect data from the user's brain.
+
+Here is a more detailed breakdown of the project architecture:
+![Project Architecture](other/assets/architecture.png)
+
+## Children Boards
+Each child board collects sensor data and sends it to the mother board. The child boards are based on the ESP8266 microcontroller and are responsible for collecting data from the following sensors:
+
+Inertial measurement unit (IMU)
+Other custom sensors (specific to your use case)
+## Mother Board
+The mother board receives data from the children boards and sends it to the application. The mother board is also based on the ESP8266 microcontroller and is responsible for the following:
+
+- Receiving data from the children boards
+- Sending data to the application
+- Managing communication between the children boards and the application
+
+## Heart Rate Sensor and Skin Resistance Sensor
+The heart rate sensor and skin resistance sensor are located on the left hand of the user. These sensors are connected to the mother board and provide additional data points for the application to use.
+
+## Muse Brain Sensor
+The Muse brain sensor collects data from the user's brain and sends it to the application. This sensor is not connected to any of the microcontrollers in the project, but instead communicates directly with the application.
+
+Use this architecture diagram to better understand how the different components of the project work together to collect and store sensor data.
+
+
 
 ## Installation
 
@@ -35,7 +64,12 @@ Once you have installed these dependencies, you can follow these steps to get st
 ## Usage
 
 Once you have followed the steps in the "Getting Started" section, you can use this project to collect real-time sensor data and visualize it.
-
+## Data Collector App
+The main.py file in the project's backend directory contains the data collector application. This application collects data from sensors and sends it to a MongoDB database. The main.py file supports two modes of operation:
+## Real-time Mode
+In real-time mode, the application continuously reads sensor data and sends it to the MongoDB database in real-time. To run the application in real-time mode, simply run the main.py add user id and select real-time box:
+## Batch Mode
+In batch mode, the application reads sensor data and saves it to a JSON file. When the JSON file reaches a certain size, the application stops reading sensor data and attempts to send the file to the MongoDB database. To run the application in batch mode, simply run the main.py add user id and select batch box:
 ## Config
 To configure the project, you should edit the `constant.py` file located in the _src/utilities_ folder. In this file, you can set the *connections port*, *bautrate*, and *chunck_size* for batch file contact.
 ## Extra
@@ -66,17 +100,6 @@ List the technologies used in your project, such as:
 - Python
 - MongoDB
 
-
-
-## Contributing
-
-Explain how others can contribute to your project, such as:
-
-1. Fork the repository.
-2. Create a new branch.
-3. Make your changes and commit them.
-4. Push to your forked repository.
-5. Submit a pull request.
 ## License
 
 This project is licensed under the terms of the MIT license. See [LICENSE](LICENSE) for more details.
