@@ -28,29 +28,41 @@ To use this project, you will need to have the following installed:
 Once you have installed these dependencies, you can follow these steps to get started with the project:
 
 1. Clone the repository to your local machine.
-3. Start the MongoDB service.
-4. Run the `main.py` script to start collecting sensor data and storing it in the database.
-5. Open the `visualize.py` script to see a visual representation of the collected data.
+3. Start the MongoDB service (mongodb/server.js) and run `node server.js`
+4. Run the `main.py` script (in backend folder) to start collecting sensor data and storing it in the database.
 
 
 ## Usage
 
 Once you have followed the steps in the "Getting Started" section, you can use this project to collect real-time sensor data and visualize it.
 
+## Config
+To configure the project, you should edit the `constant.py` file located in the _src/utilities_ folder. In this file, you can set the *connections port*, *bautrate*, and *chunck_size* for batch file contact.
+## Extra
+If you want to use MongoDB in a container, you can run the docker-compose file located in the other/docker folder. This will start a MongoDB container. Once the container is running, you can configure the config.js file located in the mongodb/config folder. This file is used to set up the initial configuration of the MongoDB instance.
+### Arduino Code
+To ensure that the correct data structure is being sent from the ESPs to the application, you should flash the Arduino code located in the *other/arduino* folder to your ESPs. This code will format the data correctly and send it to the application.
+
+Here are the steps to flash the Arduino code:
+
+Open the Arduino IDE and connect your ESP to your computer.
+Open the application.ino file located in the arduino folder.
+In the Arduino IDE, go to Tools > Board and select your ESP board.
+In the Arduino IDE, go to Tools > Port and select the port to which your ESP is connected.
+Upload the code to your ESP by clicking on the Upload button in the Arduino IDE.
+Once the code is uploaded to your ESP, it will start sending data to the application in the correct data structur
 ### Collecting Sensor Data
 
 To collect sensor data, simply run the `main.py` script. This will start collecting data from the connected sensors and storing it in the MongoDB database.
 
-### Visualizing Sensor Data
-
-To visualize the collected sensor data, run the `visualize.py` script. This will open a web page with a graph that shows the real-time data from the sensors.
 ## Technologies
 
 List the technologies used in your project, such as:
 
 - Python
 - MongoDB
-- Dash/React
+
+
 
 ## Contributing
 

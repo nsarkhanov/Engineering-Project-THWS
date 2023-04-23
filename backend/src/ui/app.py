@@ -1,3 +1,9 @@
+"""
+Project: Data-Logger
+Location: Schweinfurt, Germany
+Author: Nurlan Sarkhanov
+Date: April 22, 2023
+"""
 import tkinter as tk
 from tkinter import ttk
 import threading

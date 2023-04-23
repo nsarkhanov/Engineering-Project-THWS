@@ -1,3 +1,9 @@
+"""
+Project: Data-Logger
+Location: Schweinfurt, Germany
+Author: Nurlan Sarkhanov
+Date: April 22, 2023
+"""
 # Define endpoint APIs
 url_heart_rate = "http://localhost:8080/api/heart_rate/" 
 url_imu_sensor = "http://localhost:8080/api/imu_sensor/"
