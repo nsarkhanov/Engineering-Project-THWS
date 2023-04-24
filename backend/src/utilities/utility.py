@@ -122,8 +122,13 @@ def read_batch_data():
             print("Heart rate sensor data sent successfully.")
     print("Chunk data sent successfuly.")
     print(f"Data size:{get_size_mb(batch_path)} mb. Length:{len(data)}")
-    print("File is cleaned,start writing again.")
-
+    
+    # Check if the file exists
+    if os.path.exists(batch_path):
+        # Remove the file
+        os.remove(batch_path)
+        print("File is cleaned,start writing again.")
+      
 
 
 def sender_batch(data,userID):

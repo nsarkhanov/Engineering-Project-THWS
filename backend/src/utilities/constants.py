@@ -11,7 +11,7 @@ url_brain_sensor="http://localhost:8080/api/brain_sensor/"
 url_skin_sensor="http://localhost:8080/api/skin_sensor/"
 
 # chunk size mb  of batch file
-chunk_size=0.1
+chunk_size=10
 
 # constant for sensor 
 left_hand_data_length=21

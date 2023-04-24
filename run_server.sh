@@ -1,12 +1,11 @@
 #!/bin/bash
-# Activate virtual environment
-source venv/bin/activate
-# Run main.py
-python backend/main.py
-sleep 52
-# Run node server.js in the background
-node mongodb/server.js &
-# Wait for 2 seconds
-sleep 2
 
+
+
+
+# Open new terminal tab to activate virtual environment
+gnome-terminal --tab --title="backen server" -- /bin/bash -c "node mongodb/server.js; exec bash"
+
+# Open new terminal tab to run Python script
+gnome-terminal --tab --title="Run Python script" -- /bin/bash -c "source venv/bin/activate; python backend/main.py; exec bash"
 
