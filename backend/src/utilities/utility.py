@@ -13,6 +13,19 @@ import json,os,time
 from datetime import datetime
 import requests
 from src.utilities.constants import url_brain_sensor,url_imu_sensor,url_heart_rate,url_skin_sensor,chunk_size
+from pylsl import StreamInlet, resolve_byprop
+from src.utilities.constants import *
+
+def EEG():
+    streams = resolve_byprop('type', 'EEG', timeout=LSL_SCAN_TIMEOUT)
+    if len(streams) == 0:
+        raise(RuntimeError("Can't find EEG stream."))
+    else:
+        inlet = StreamInlet(streams[0], max_chunklen=LSL_EEG_CHUNK)
+        sample=inlet.pull_sample()
+        return sample
+    
+
 
 class CustomJSONEncoder(json.JSONEncoder):
     def default(self, obj):
@@ -77,6 +90,19 @@ def sender(data,userID):
         print(f"IMU rates sent successfully:{imu_pack}")
     else:
         print(f"Error sending imu rates: {r.status_code}")
+
+def eeg_sender(userID):
+    sample=EEG()
+    brain_pack=brain_sensor_reader(data=sample,userID=userID)
+    r=requests.post(url_brain_sensor, brain_pack)
+    if r.status_code == 200:  # check if the request was successful
+        print(f"Brain  rate sent successfully:{brain_pack}")
+    else:
+        print(f"Error sending heart rate: {r.status_code}")
+
+
+
+
 
 def data_saver(data,userID):
     esp_data=data.split(",")

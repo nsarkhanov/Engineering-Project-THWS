@@ -1,3 +1,5 @@
+muselsl
 pyserial
 tk
 requests
+pylsl
