@@ -18,11 +18,11 @@ export class IconsComponent implements OnInit{
   allImages = ["../../../../assets/images/icon1.jpg", "../../../../assets/images/icon2.jpg",
               "../../../../assets/images/icon3.jpg", "../../../../assets/images/skin_sensor.jpg"];
 
-  constructor(private uiService:LiveService,
+  constructor(private liveService:LiveService,
             private router: Router) {
-    this.curIcon = uiService.getCurrentDisplayGraph();
-    this.curTitle = uiService.getCurrentTitle();
-    this.subscription = this.uiService
+    this.curIcon = liveService.getCurrentDisplayGraph();
+    this.curTitle = liveService.getCurrentTitle();
+    this.subscription = this.liveService
         .onGraphChange()
         .subscribe((value) => this.curIcon = value);
   }
@@ -35,7 +35,7 @@ export class IconsComponent implements OnInit{
 
 
   changeDisplayGraph(i: number) {
-    this.curTitle = this.uiService.changeDisplayGraph(i);
+    this.curTitle = this.liveService.changeDisplayGraph(i);
   }
 
 }

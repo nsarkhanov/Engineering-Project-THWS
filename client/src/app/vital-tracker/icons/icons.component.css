@@ -56,13 +56,23 @@
     align-items: center;
   }
   
-  .DropDownItem {
+  .DropDownItemIMU {
     font-size: 16px;
     color: #333;
     cursor: pointer;
     padding: 10px;
     height: 75px;
     border-color: rgb(202, 77, 32);
+  }
+  
+  .DropDownItemMUSE {
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+    padding: 10px;
+    height: 75px;
+    border-color: rgb(202, 77, 32);
+    margin-right: 1px;
   }
   
   /* .DropDownItem:hover {

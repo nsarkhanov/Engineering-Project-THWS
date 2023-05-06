@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 
 
 
-let baseUrl = 'mongodb://localhost:27017';
+let baseUrl = 'http://localhost:8080/api/assembly_order';
 
 @Injectable({
   providedIn: 'root'

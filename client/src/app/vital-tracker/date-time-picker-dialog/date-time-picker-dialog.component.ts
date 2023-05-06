@@ -13,17 +13,20 @@ import * as moment from 'moment';
 export class DateTimePickerDialogComponent {
   group: FormGroup;
   selectedDateTime: moment.Moment;
+  minuteStep: 1;
+  minutes: true;
+  seconds: true;
   title = 'datetimepicker';
-
   constructor(
-    private dialogRef: MatDialogRef<DateTimePickerDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, 
-    @Inject(LiveService) private liveService:LiveService, 
-    private formBuilder: FormBuilder) {
-      this.group = this.formBuilder.group({
-        datetimeCtrl: ['', Validators.required]
-      });
-    }
+        private dialogRef: MatDialogRef<DateTimePickerDialogComponent>,
+        @Inject(MAT_DIALOG_DATA) public data: any, 
+        @Inject(LiveService) private liveService:LiveService, 
+        private formBuilder: FormBuilder) {
+    console.log("HII" + data.min);
+    this.group = this.formBuilder.group({
+      datetimeCtrl: ['', Validators.required]
+    });
+  }
 
 
   onCancel(): void {
@@ -33,7 +36,9 @@ export class DateTimePickerDialogComponent {
   onOk(): void {
     this.selectedDateTime = moment(this.group.value.datetimeCtrl);
     const formattedDateTime = this.selectedDateTime.format('MMMM Do YYYY, h:mm:ss a');
-    this.liveService.changeDisplayTime(this.data.start, formattedDateTime);
+    const momentDate = moment(formattedDateTime, "MMMM Do YYYY, h:mm:ss a");
+    const date = momentDate.toDate();
+    this.liveService.changeDisplayTime(this.data.start, date);
     this.dialogRef.close(formattedDateTime);
   }
 

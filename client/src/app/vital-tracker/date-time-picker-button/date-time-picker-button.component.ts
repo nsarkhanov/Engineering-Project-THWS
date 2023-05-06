@@ -11,21 +11,28 @@ export class DateTimePickerButtonComponent {
 
   // we display buttonText[start]
   @Input() start: number;
+  @Input() min: Date;
+  @Input() max: Date;
+
+
   buttonText = ["Select start time", "Select end time"];
   
   constructor(private dialog: MatDialog) {}
 
-  openDateTimePicker(textToDisplay: string): void {
+  openDateTimePicker(): void {
     const dialogRef = this.dialog.open(DateTimePickerDialogComponent, {
       width: '400px',
       disableClose: true,
       autoFocus: false,
       data: {
         start: this.start,
+        min: this.min,
+        max: this.max,
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      // if start = 0, we are on the start button, so we will display buttonText[0], otherwise buttonText[1]
       if (result != undefined && result != "Invalid date")
         this.buttonText = ["Start: " + result, "End: " + result];
       console.log("Result: " + this.buttonText);

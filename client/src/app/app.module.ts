@@ -50,6 +50,7 @@ import { MatDatetimepickerModule, MatNativeDatetimeModule } from '@mat-datetimep
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ImuDropdownComponent } from './vital-tracker/imu-dropdown/imu-dropdown.component';
+import { MuseDropdownComponent } from './vital-tracker/muse-dropdown/muse-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { ImuDropdownComponent } from './vital-tracker/imu-dropdown/imu-dropdown.
     VitalTrackerComponent,
     DateTimePickerButtonComponent,
     DateTimePickerDialogComponent,
-    ImuDropdownComponent
+    ImuDropdownComponent,
+    MuseDropdownComponent
   ],
   imports: [
     BrowserModule,
@@ -97,15 +99,16 @@ import { ImuDropdownComponent } from './vital-tracker/imu-dropdown/imu-dropdown.
     MatNativeDateModule,
     MatDatepickerModule,
     MatDatetimepickerModule,
-    MatNativeDatetimeModule,
+    MatNativeDatetimeModule,        // <----- this module will be deprecated in the future version.
     MatFormFieldModule,
     MatInputModule,
     // FontAwesomeModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule, 
+    
   ],
-  providers: [Assembly_order, Skill_matrix_human, Skill_matrix_robot, Criteria_Catalogue, MTM_Human, ASP, MatDatetimepickerModule
+  providers: [Assembly_order, Skill_matrix_human, Skill_matrix_robot, Criteria_Catalogue, MTM_Human, ASP, MatDatetimepickerModule,
   ],
   bootstrap: [AppComponent]
 })

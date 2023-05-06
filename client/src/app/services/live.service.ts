@@ -14,6 +14,19 @@ export class LiveService {
   private curTitle: string = "Brain wave sensor";
   private allTitles = ["Muse sensor", "Heart rate sensor", "IMU sensor", "Skin Sensor"];
 
+  private startTime: Date;
+  private endTime: Date;
+  private startTimeSubject = new Subject<any>();
+  private endTimeSubject = new Subject<any>();
+
+  private museSelected: number[] = [1, 2, 3, 4, 5];//['TP9', 'AF7','AF8','TP10','RightAUX']
+  private museSubject = new Subject<any>();
+
+  private imuData: number[] = [1]; // ['Acceleration', 'Orientation','Magnetic','Gyro','Linear','Gravity']
+  private imuAxes: number[] = [1]; // ['X-Axis', 'Y-Axis', 'Z-Axis']
+  private imuDataSubject = new Subject<any>();
+  private imuAxesSubject = new Subject<any>();
+
   private subject = new Subject<any>();
   constructor() { }
 
@@ -25,6 +38,80 @@ export class LiveService {
     return this.curTitle;
   }
 
+  changeMuseSelected(graphNumbers: String[]) {
+    console.log("In live service: " + graphNumbers[0] + " dede " + graphNumbers[1]);
+    // ['TP9', 'AF7','AF8','TP10','RightAUX']
+    var museSelected: number[] = graphNumbers.map(d => {
+      switch(d) {
+        case 'TP9':
+          return 1;
+        case 'AF7':
+          return 2;
+        case 'AF8':
+          return 3;
+        case 'TP10':
+          return 4;
+        case 'RightAUX':
+          return 5;
+        default:
+          return -1;
+      }
+    });
+    this.museSelected = museSelected;
+    this.museSubject.next(this.museSelected);
+  }
+
+  /**
+   * 
+   * @param data 
+   * @param funktion 0 for data, and 1 for axis
+   */
+  changeIMUSelected(data: String[], funktion: number) {
+    // ['Acceleration', 'Orientation','Magnetic','Gyro','Linear','Gravity']
+    // ['X-Axis', 'Y-Axis', 'Z-Axis']
+    if (funktion == 0) {
+      var imuData: number[] = data.map(d => {
+        switch(d) {
+          case 'Acceleration':
+            return 1;
+          case 'Orientation':
+            return 2;
+          case 'Magnetic':
+            return 3;
+          case 'Gyro':
+            return 4;
+          case 'Linear':
+            return 5;
+          case 'Gravity':
+            return 6;
+          default:
+            return -1;
+        }
+      });
+      this.imuData = imuData;
+      this.imuDataSubject.next(this.imuData);
+    }
+    if (funktion == 1) {
+      var imuAxes: number[] = data.map(d => {
+        switch(d) {
+          case 'X-Axis':
+            return 1;
+          case 'Y-Axis':
+            return 2;
+          case 'Z-Axis':
+            return 3;
+          default:
+            return -1;
+        }
+      });
+      this.imuAxes = imuAxes;
+      this.imuAxesSubject.next(this.imuAxes);
+
+    }
+  }
+
+
+
   /**
    * If start is 0, we changed start time. If it is 1, we changed end time
    * @param start 
@@ -32,6 +119,15 @@ export class LiveService {
    * @returns 
    */
   changeDisplayTime(start: number, time) {
+    console.log("Time is: " + time);
+    if (start == 0) {
+      this.startTime = time;
+      this.startTimeSubject.next(this.startTime);
+    }
+    if (start == 1) {
+      this.endTime = time;
+      this.endTimeSubject.next(this.endTime);
+    }
     let timeStr = start == 0 ? "Start time" : "End time";
     console.log("This is from the Live Service! " + timeStr +" is " + time);
   }
@@ -53,8 +149,28 @@ export class LiveService {
     return this.graphSubject.asObservable();
   }
 
+  onMuseChange(): Observable<any> {
+    return this.museSubject.asObservable();
+  }
+
+  onIMUDataChange(): Observable<any> {
+    return this.imuDataSubject.asObservable();
+  }
+
+  onIMUAxesChange(): Observable<any> {
+    return this.imuAxesSubject.asObservable();
+  }
+
   onTitleChange(): Observable<any> {
     return this.titleSubject.asObservable();
+  }
+
+  onstartTimeChange(): Observable<any> {
+    return this.startTimeSubject.asObservable();
+  }
+
+  onEndTimeChange(): Observable<any> {
+    return this.endTimeSubject.asObservable();
   }
 
   onToggle(): Observable<any> {
@@ -63,6 +179,22 @@ export class LiveService {
 
   setMarketStatusToPlot(market: MarketPrice[]) {
     this.marketStatusToPlot = market;
+  }
+
+  setStartTime(startTime: Date) {
+    this.startTime = startTime;
+  }
+
+  setEndTime(endTime: Date) {
+    this.endTime = endTime;
+  }
+
+  getStartTime() {
+    return this.startTime;
+  }
+
+  getEndTime() {
+    return this.endTime;
   }
 
   getMarketStatusToPlot() {

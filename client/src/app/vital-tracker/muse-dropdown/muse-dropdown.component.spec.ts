@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LoginComponent } from './login.component';
+import { MuseDropdownComponent } from './muse-dropdown.component';
 
-describe('LoginComponent', () => {
-  let component: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
+describe('MuseDropdownComponent', () => {
+  let component: MuseDropdownComponent;
+  let fixture: ComponentFixture<MuseDropdownComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LoginComponent ]
+      declarations: [ MuseDropdownComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(LoginComponent);
+    fixture = TestBed.createComponent(MuseDropdownComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

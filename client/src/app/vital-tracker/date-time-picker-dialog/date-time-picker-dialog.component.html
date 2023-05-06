@@ -17,11 +17,20 @@
       formControlName="datetimeCtrl"
       [matDatetimepicker]="datetimePicker"
       required
+      [min]="data.min"
+      [max]="data.max"
+      time="true"
+      minutes="true"
+      seconds="true"
       autocomplete="true"
+      auto-ok="true"
+      format="HH:mm:ss"
+      (keyup.enter)="onOk()"
+      (keydown.enter)="onOk()"
     />
   </mat-form-field>
   <mat-dialog-actions>
     <button mat-button (click)="onCancel()">Cancel</button>
-    <button mat-button (click)="onOk()">Ok</button>
+    <button mat-button #okButton (click)="onOk()">Ok</button>
   </mat-dialog-actions>
 </form>

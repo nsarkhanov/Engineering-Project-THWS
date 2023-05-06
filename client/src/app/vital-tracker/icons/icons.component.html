@@ -5,10 +5,16 @@
       <span class="title">{{ curTitle }}</span>
     </div>
     <div *ngIf="curIcon == 3" class="DropDownContainer">
-      <app-imu-dropdown class="DropDownItem" [elements]="['Acceleration', 'Orientation','Magnetic','Gyro','Linear','Gravity']" [displayText] = "'Choose data'">
+      <app-imu-dropdown class="DropDownItemIMU" [elements]="['Acceleration', 'Orientation','Magnetic','Gyro','Linear','Gravity']" 
+                        [displayText] = "'Choose data'" [function] = 0>
       </app-imu-dropdown>
-      <app-imu-dropdown class="DropDownItem" [elements]="['X-Axis', 'Y-Axis', 'Z-Axis']" [displayText] = "'Choose axis'">
+      <app-imu-dropdown class="DropDownItemIMU" [elements]="['X-Axis', 'Y-Axis', 'Z-Axis']" 
+                        [displayText] = "'Choose axis'" [function] = 1>
       </app-imu-dropdown>
+    </div>
+    <div *ngIf="curIcon == 1" class="DropDownContainer">
+      <app-muse-dropdown class="DropDownItemMUSE" [elements]="['TP9', 'AF7','AF8','TP10','RightAUX']" [displayText] = "'Choose data'">
+      </app-muse-dropdown>
     </div>
     <div class="icons">
       <app-vital_button
