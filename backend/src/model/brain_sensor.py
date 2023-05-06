@@ -5,7 +5,6 @@ Author: Nurlan Sarkhanov
 Date: April 22, 2023
 """
 from datetime import datetime
-from src.utilities.constants import brain_sensor_length
 
 #read data froms sensor data. 
 def brain_sensor_reader(data,userID):

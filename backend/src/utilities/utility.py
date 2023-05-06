@@ -15,6 +15,8 @@ import requests
 from src.utilities.constants import url_brain_sensor,url_imu_sensor,url_heart_rate,url_skin_sensor,chunk_size
 from pylsl import StreamInlet, resolve_byprop
 from src.utilities.constants import *
+import muselsl
+
 
 def EEG():
     streams = resolve_byprop('type', 'EEG', timeout=LSL_SCAN_TIMEOUT)
@@ -90,7 +92,15 @@ def sender(data,userID):
         print(f"IMU rates sent successfully:{imu_pack}")
     else:
         print(f"Error sending imu rates: {r.status_code}")
+    brain_pack=brain_sensor_reader(data=EEG(),userID=userID)
+    r=requests.post(url_brain_sensor, brain_pack)
+    if r.status_code == 200:  # check if the request was successful
+        print(f"Brain rates sent successfully:{brain_pack}")
+    else:
+        print(f"Error sending brain rates: {r.status_code}")
 
+
+## eeg sensor 
 def eeg_sender(userID):
     sample=EEG()
     brain_pack=brain_sensor_reader(data=sample,userID=userID)
@@ -103,12 +113,13 @@ def eeg_sender(userID):
 
 
 
-
+#read data from sensor save in batch sensor 
 def data_saver(data,userID):
     esp_data=data.split(",")
     sensorID=esp_data[0]
     batch_data={}
     batch_data["imu_rates"]=imu_sensor_reader(data=esp_data,userID=userID)
+    batch_data["brain_rate"]=brain_sensor_reader(data=EEG(),userID=userID)
     if sensorID=="1":
         batch_data["hear_rate"]=heart_rate_reader(data=esp_data,userID=userID)
         batch_data["skin_rate"]=skin_rate_reader(data=esp_data,userID=userID)
@@ -118,7 +129,7 @@ def data_saver(data,userID):
     with open(batch_path, "a") as f:
         json.dump(batch_data, f,cls=CustomJSONEncoder)
         
-
+#check size of json file
 def get_size_mb(file_path):
     file_size = os.path.getsize(file_path)
 # Convert the file size to a human-readable format (e.g. MB or GB)
@@ -126,7 +137,7 @@ def get_size_mb(file_path):
     return size_in_mb
 # Set the headers and the JSON data in the request
 
-
+## read json file to send mongodb 
 def read_batch_data():
     # Open the file for reading
     with open(batch_path, 'r') as f:
@@ -146,6 +157,10 @@ def read_batch_data():
             r=requests.post(url_heart_rate,item['hear_rate'])
             time.sleep(0.1)
             print("Heart rate sensor data sent successfully.")
+        if 'brain_rate' in item:
+            r=requests.post(url_brain_sensor,item['brain_rate'])
+            time.sleep(0.1)
+            print("Brain rate sensor data sent successfully.")
     print("Chunk data sent successfuly.")
     print(f"Data size:{get_size_mb(batch_path)} mb. Length:{len(data)}")
     

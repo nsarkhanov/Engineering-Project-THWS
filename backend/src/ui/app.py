@@ -19,10 +19,10 @@ def stop_data_sender_thread():
 def data_sender():
     while not stop_event.is_set():
         # receive data from serial port and log it
-        sensor_data = ser.readline().decode()
+        sensor_data = ser.readline().decode().strip()   #extra for 
         if mode_status=="real-time":
             sender(data=sensor_data, userID=userID)
-            eeg_sender(userID=userID)
+            # eeg_sender(userID=userID)
         elif mode_status=="batch":
             finished=sender_batch(data=sensor_data, userID=userID)
             if finished:

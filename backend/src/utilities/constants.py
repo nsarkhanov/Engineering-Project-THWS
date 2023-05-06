@@ -11,15 +11,14 @@ url_brain_sensor="http://localhost:8080/api/brain_sensor/"
 url_skin_sensor="http://localhost:8080/api/skin_sensor/"
 
 # chunk size mb  of batch file
-chunk_size=10
+chunk_size=0.3
 
 # constant for sensor 
 left_hand_data_length=21
 other_data_length=18
-brain_sensor_length=19
 #serial connection 
 port_name="COM3"  #"/dev/ttyACM0" for linux
-baudrate=9600
+baudrate=9600         #9600
 # EEG
 MUSE_NB_EEG_CHANNELS = 5
 MUSE_SAMPLING_EEG_RATE = 256
