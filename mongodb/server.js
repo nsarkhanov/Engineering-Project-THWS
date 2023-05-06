@@ -62,7 +62,7 @@ require("./app/routes/heart_rate_sensor.routes")(app);
 require("./app/routes/imu_sensor.routes")(app);
 require("./app/routes/brain_sensor.routes")(app);
 require("./app/routes/skin_sensor.routes")(app);
-
+require("./app/routes/user.routes")(app);
 
 
 // set port, listen for requests

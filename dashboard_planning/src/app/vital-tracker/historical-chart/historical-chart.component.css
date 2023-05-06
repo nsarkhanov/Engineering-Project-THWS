@@ -1,0 +1,12 @@
+.DateTimeSelection {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+  
+  .DateTimeSelector {
+    width: 10px;
+    margin-right: 16px;
+  }

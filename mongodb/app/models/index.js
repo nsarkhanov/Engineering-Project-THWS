@@ -19,4 +19,5 @@ db.heart_rate= require("./heart_rate_sensor.js")(mongoose);
 db.brain_sensor= require("./brain_sensor.js")(mongoose);
 db.imu_sensor= require("./imu_sensor.js")(mongoose);
 db.skin_sensor= require("./skin_sensor.js")(mongoose);
+db.user= require("./user.js")(mongoose);
 module.exports = db;
