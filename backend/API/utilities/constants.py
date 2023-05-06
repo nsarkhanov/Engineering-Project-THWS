@@ -18,7 +18,7 @@ left_hand_data_length=21
 other_data_length=18
 brain_sensor_length=19
 #serial connection 
-port_name="COM3"  #"/dev/ttyACM0" for linux
+port_name="COM8"  #"/dev/ttyACM0" for linux
 baudrate=9600
 # EEG
 MUSE_NB_EEG_CHANNELS = 5

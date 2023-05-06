@@ -10,7 +10,7 @@ stop_event=threading.Event()
 ser=serial_connection(port_name=port_name,baudrate=9600)
 
 def start_sender(userID=1):
-    
+
     #start borad connection and process
     command="s"
     ser.write(command.encode())
@@ -21,6 +21,7 @@ def start_sender(userID=1):
 
 #start threading in button 
 def start_thread(userID):
+    data_sender_thread=threading.Thread(target=start_sender(userID=userID))
     data_sender_thread.start() 
 
 def stop_data_sender_thread():

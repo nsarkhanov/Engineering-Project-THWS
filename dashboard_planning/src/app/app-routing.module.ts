@@ -13,6 +13,12 @@ import { VitalTrackerComponent } from './vital-tracker/vital-tracker/vital-track
 import { AboutComponent } from './vital-tracker/about/about.component';
 import { LiveChartComponent } from './vital-tracker/live-chart/live-chart.component';
 import { HistoricalChartComponent } from './vital-tracker/historical-chart/historical-chart.component';
+import { AuthGuard } from './vital-tracker/guard/auth.guard';
+// import { HomeComponent_ } from './home/home.component';
+import { LoginComponent } from './vital-tracker/login/login.component';
+import { RegisterComponent } from './vital-tracker/register/register.component';
+import { UserComponent } from './vital-tracker/user/user.component';
+
 
 const APP_routes: Routes = [
   {path: "home", redirectTo: "home"},
@@ -28,6 +34,12 @@ const APP_routes: Routes = [
   { 
     path: 'vital-tracker', 
     children: [
+      // {path:"Login",} add login page 
+      { path: 'login', component: LoginComponent },
+      { path: 'register', component: RegisterComponent },
+      { path: 'user', component: UserComponent ,canActivate:[AuthGuard]},
+      { path: '', component: HomeComponent ,canActivate:[AuthGuard]},
+      // 
       { path: 'Sensors', component: AboutComponent },
       { path: 'LiveReport', component: LiveChartComponent },
       { path: 'HistoricalReport', component: HistoricalChartComponent }
@@ -36,4 +48,4 @@ const APP_routes: Routes = [
   // {path: "vital-tracker", component: VitalTrackerComponent}
 ];
 
-export const routing = RouterModule.forRoot(APP_routes)
+export const routing = RouterModule.forRoot(APP_routes) 
